@@ -53,7 +53,7 @@ export default function Navbar() {
           className="shrink-0 flex items-center gap-3 min-w-0"
         >
           <img
-            src="/favicon.ico"
+            src="/logo.png"
             alt="logo"
             width={36}
             height={36}

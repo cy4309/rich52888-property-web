@@ -82,7 +82,11 @@ export default function Stats() {
       ([entry]) => {
         if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.2 },
+      {
+        // 以「實際可閱讀區」為準：頂部扣除 sticky nav，底部留白避免行動版網址列/工具列
+        rootMargin: "-80px 0px -22% 0px",
+        threshold: 0.35,
+      },
     );
 
     observer.observe(el);

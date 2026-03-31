@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 const siteName = "謙謙資產管理顧問";
 export const baseUrl =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
-const ogImagePath = "/og.jpg";
+const ogImagePath = "/logo.png";
 
 type GeneratePageMetadataParams = {
   title: string;
