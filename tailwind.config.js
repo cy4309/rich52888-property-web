@@ -4,6 +4,15 @@ module.exports = {
   darkMode: "class",
   theme: {
     extend: {
+      keyframes: {
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
+      },
+      animation: {
+        marquee: "marquee linear infinite",
+      },
       colors: {
         primary: "#dcb768", // 金色
         deep: "#0f172a", // 企業深藍色

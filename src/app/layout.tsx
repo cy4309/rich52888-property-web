@@ -4,6 +4,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import FloatingContactCard from "@/components/layout/FloatingContactCard";
+import { SiteDealMarquee } from "@/components/ui/SiteDealMarquee";
 import { baseUrl } from "@/lib/seo";
 
 /** 讓相對路徑 OG／canonical 解析正確；請將 NEXT_PUBLIC_SITE_URL 設成實際上線網域（含 https，與託管 301 目標一致） */
@@ -28,7 +29,9 @@ export default function RootLayout({
     <html lang="zh-Hant">
       <body>
         <Navbar />
-        {children}
+        <SiteDealMarquee />
+        {/* 往上 1px 與跑馬燈重疊，避免次像素縫隙露出底層而像白線 */}
+        <div className="relative -mt-px">{children}</div>
         <Footer />
         <div className="h-16 lg:hidden" aria-hidden />
         <BottomNav />

@@ -4,7 +4,7 @@ import { FaArrowRight } from "react-icons/fa";
 
 export default function Hero() {
   return (
-    <section id="hero" className="py-20 bg-deep">
+    <section id="hero" className="pt-10 pb-20 bg-deep">
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex flex-col gap-4">
           <p className="text-xs text-primary tracking-widest font-bold">
