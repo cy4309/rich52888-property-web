@@ -16,7 +16,7 @@ export default function AboutIntro() {
           </p>
           {/* <Button>了解更多</Button> */}
           {/* Contact info */}
-          <div className="grid sm:grid-cols-3 gap-6 max-md:max-w-sm max-md:mx-auto">
+          <div className="grid sm:grid-cols-2 gap-6 max-md:max-w-sm max-md:mx-auto">
             {[
               { label: "公司地址", value: "新北市板橋區長安街307號" },
               { label: "公司電話", value: "02-2901-2345" },
