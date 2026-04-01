@@ -3,6 +3,7 @@
 import { useState } from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
+import { CONTACT_REQUIREMENTS_MAX_CHARS } from "@/lib/contact-limits";
 
 export default function ContactCard() {
   const [name, setName] = useState("");
@@ -49,6 +50,11 @@ export default function ContactCard() {
 
     if (!isValidEmail(trimmedEmail)) {
       setValidationError("請填寫有效的電子郵件地址");
+      return;
+    }
+
+    if (trimmedRequirements.length > CONTACT_REQUIREMENTS_MAX_CHARS) {
+      setValidationError(`需求最多 ${CONTACT_REQUIREMENTS_MAX_CHARS} 字`);
       return;
     }
 
@@ -165,17 +171,30 @@ export default function ContactCard() {
               />
             </div>
             <div>
-              <label
-                htmlFor="contact-requirements"
-                className="block text-xs font-mono uppercase tracking-widest opacity-60 mb-2"
-              >
-                需求
-              </label>
+              <div className="flex items-baseline justify-between gap-2 mb-2">
+                <label
+                  htmlFor="contact-requirements"
+                  className="block text-xs font-mono uppercase tracking-widest opacity-60"
+                >
+                  需求
+                </label>
+                <span
+                  className="text-xs tabular-nums opacity-50"
+                  aria-live="polite"
+                >
+                  {requirements.length}/{CONTACT_REQUIREMENTS_MAX_CHARS}
+                </span>
+              </div>
               <textarea
                 id="contact-requirements"
                 value={requirements}
-                onChange={(e) => setRequirements(e.target.value)}
+                onChange={(e) =>
+                  setRequirements(
+                    e.target.value.slice(0, CONTACT_REQUIREMENTS_MAX_CHARS),
+                  )
+                }
                 required
+                maxLength={CONTACT_REQUIREMENTS_MAX_CHARS}
                 rows={4}
                 suppressHydrationWarning
                 className="w-full rounded-2xl border border-white/20 px-4 py-3 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors resize-none"

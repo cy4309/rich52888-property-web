@@ -63,7 +63,7 @@ export default function Navbar() {
           <div className="flex flex-col min-w-0">
             <div className="font-bold text-deep">謙謙資產管理顧問</div>
             <div className="text-xs text-neutral-500">
-              Rich52888 Asset Management
+              RICH52888 ASSET MANAGEMENT
             </div>
           </div>
         </Link>

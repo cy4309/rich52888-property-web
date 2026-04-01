@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { CONTACT_REQUIREMENTS_MAX_CHARS } from "@/lib/contact-limits";
 
-const MAX_REQUIREMENTS_LEN = 8000;
+const MAX_REQUIREMENTS_LEN = CONTACT_REQUIREMENTS_MAX_CHARS;
 const MAX_PHONE_LEN = 32;
 
 function isValidPhoneInput(value: string): boolean {
@@ -53,11 +54,18 @@ export async function POST(request: NextRequest) {
     typeof fields.email === "string" ? fields.email.trim() : "";
   const trimmedReq =
     typeof fields.requirements === "string"
-      ? fields.requirements.trim().slice(0, MAX_REQUIREMENTS_LEN)
+      ? fields.requirements.trim()
       : "";
 
   if (!trimmedName || !trimmedPhone || !trimmedEmail || !trimmedReq) {
     return NextResponse.json({ error: "請填寫完整表單" }, { status: 400 });
+  }
+
+  if (trimmedReq.length > MAX_REQUIREMENTS_LEN) {
+    return NextResponse.json(
+      { error: `需求最多 ${MAX_REQUIREMENTS_LEN} 字` },
+      { status: 400 },
+    );
   }
 
   if (!isValidPhoneInput(trimmedPhone)) {

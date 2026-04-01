@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <nav className="hidden lg:flex flex-wrap gap-6">
               <div className="text-sm">
-                <p>© test</p>
+                <p>© RICH52888</p>
               </div>
               {NAV_LINKS.map(({ href, label }) => (
                 <Link
