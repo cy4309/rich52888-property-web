@@ -52,18 +52,20 @@ export async function POST(request: NextRequest) {
       : "";
   const trimmedEmail =
     typeof fields.email === "string" ? fields.email.trim() : "";
+  const trimmedDemand =
+    typeof fields.demand === "string" ? fields.demand.trim() : "";
   const trimmedReq =
     typeof fields.requirements === "string"
       ? fields.requirements.trim()
       : "";
 
-  if (!trimmedName || !trimmedPhone || !trimmedEmail || !trimmedReq) {
+  if (!trimmedName || !trimmedPhone) {
     return NextResponse.json({ error: "請填寫完整表單" }, { status: 400 });
   }
 
   if (trimmedReq.length > MAX_REQUIREMENTS_LEN) {
     return NextResponse.json(
-      { error: `需求最多 ${MAX_REQUIREMENTS_LEN} 字` },
+      { error: `備註最多 ${MAX_REQUIREMENTS_LEN} 字` },
       { status: 400 },
     );
   }
@@ -75,7 +77,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
+  if (trimmedEmail && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmedEmail)) {
     return NextResponse.json(
       { error: "請填寫有效的電子郵件地址" },
       { status: 400 },
@@ -93,6 +95,7 @@ export async function POST(request: NextRequest) {
           name: trimmedName,
           phone: trimmedPhone,
           email: trimmedEmail,
+          demand: trimmedDemand,
           requirements: trimmedReq,
         },
       }),

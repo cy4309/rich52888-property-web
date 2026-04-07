@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { SiLine } from "react-icons/si";
+import { BsHeadset } from "react-icons/bs";
 import {
-  HiOutlineChatBubbleLeftRight,
   HiOutlinePhone,
   HiOutlineXMark,
 } from "react-icons/hi2";
@@ -15,17 +15,17 @@ const CONTACTS = [
     id: "A" as const,
     label: "執行顧問",
     name: "吳何謙 Kane",
-    lineUrl: "https://line.me/ti/p/@richteam999",
-    lineDisplay: "@richteam999",
+    lineUrl: "https://line.me/ti/p/@030iqqht",
+    lineDisplay: "@030iqqht",
     phoneDisplay: "0931-953-434",
     phoneTel: "+886931953434",
   },
   {
     id: "B" as const,
-    label: "執行特助",
+    label: "執行顧問",
     name: "莊松諺 Syen",
-    lineUrl: "https://line.me/ti/p/@richteam999",
-    lineDisplay: "@richteam999",
+    lineUrl: "https://line.me/ti/p/@030iqqht",
+    lineDisplay: "@030iqqht",
     phoneDisplay: "0958-169-162",
     phoneTel: "+886958169162",
   },
@@ -92,7 +92,7 @@ export default function FloatingContactCard() {
                 {CONTACTS[1].label}
               </button>
             </div>
-            <p className="mt-2 text-center text-sm font-semibold text-deep">
+            <p className="mb-2 mt-4 text-center text-sm font-semibold text-deep">
               {c.name}
             </p>
           </div>
@@ -135,7 +135,7 @@ export default function FloatingContactCard() {
           aria-label="開啟聯絡資訊"
           aria-expanded={open}
         >
-          <HiOutlineChatBubbleLeftRight className="h-7 w-7" aria-hidden />
+          <BsHeadset className="h-7 w-7" aria-hidden />
         </button>
       )}
     </div>

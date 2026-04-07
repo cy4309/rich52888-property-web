@@ -9,6 +9,7 @@ export default function ContactCard() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
+  const [demand, setDemand] = useState("");
   const [requirements, setRequirements] = useState("");
   const [status, setStatus] = useState<
     "idle" | "loading" | "success" | "error"
@@ -31,14 +32,10 @@ export default function ContactCard() {
     const trimmedName = name.trim();
     const trimmedPhone = phone.trim();
     const trimmedEmail = email.trim();
+    const trimmedDemand = demand.trim();
     const trimmedRequirements = requirements.trim();
 
-    if (
-      !trimmedName ||
-      !trimmedPhone ||
-      !trimmedEmail ||
-      !trimmedRequirements
-    ) {
+    if (!trimmedName || !trimmedPhone) {
       setValidationError("請填寫完整表單");
       return;
     }
@@ -48,13 +45,13 @@ export default function ContactCard() {
       return;
     }
 
-    if (!isValidEmail(trimmedEmail)) {
+    if (trimmedEmail && !isValidEmail(trimmedEmail)) {
       setValidationError("請填寫有效的電子郵件地址");
       return;
     }
 
     if (trimmedRequirements.length > CONTACT_REQUIREMENTS_MAX_CHARS) {
-      setValidationError(`需求最多 ${CONTACT_REQUIREMENTS_MAX_CHARS} 字`);
+      setValidationError(`備註最多 ${CONTACT_REQUIREMENTS_MAX_CHARS} 字`);
       return;
     }
 
@@ -68,6 +65,7 @@ export default function ContactCard() {
             name: trimmedName,
             phone: trimmedPhone,
             email: trimmedEmail,
+            demand: trimmedDemand,
             requirements: trimmedRequirements,
           },
         }),
@@ -82,6 +80,7 @@ export default function ContactCard() {
       setName("");
       setPhone("");
       setEmail("");
+      setDemand("");
       setRequirements("");
       setTimeout(() => setStatus("idle"), 5000);
     } catch (caught) {
@@ -103,7 +102,10 @@ export default function ContactCard() {
       className="py-20"
     >
       <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle title="立即諮詢" subtitle="歡迎與我們聯繫" />
+        <SectionTitle
+          title="立即諮詢"
+          subtitle="歡迎直接填寫表單與我們聯繫，或直接撥打電話，或加LINE洽詢"
+        />
         {/* Requirements form */}
         <form
           onSubmit={handleSubmit}
@@ -156,7 +158,7 @@ export default function ContactCard() {
                 htmlFor="contact-email"
                 className="block text-xs font-mono uppercase tracking-widest opacity-60 mb-2"
               >
-                電子郵件
+                電子郵件（選填）
               </label>
               <input
                 id="contact-email"
@@ -165,10 +167,49 @@ export default function ContactCard() {
                 autoComplete="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                required
                 suppressHydrationWarning
                 className="w-full rounded-2xl border border-white/20 px-4 py-3 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors"
               />
+            </div>
+            <div>
+              <label
+                htmlFor="contact-demand"
+                className="block text-xs font-mono uppercase tracking-widest opacity-60 mb-2"
+              >
+                需求（選填）
+              </label>
+              <div className="relative">
+                <select
+                  id="contact-demand"
+                  value={demand}
+                  onChange={(e) => setDemand(e.target.value)}
+                  suppressHydrationWarning
+                  className={`w-full rounded-2xl border border-white/20 px-4 py-3 pr-10 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors appearance-none ${
+                    demand ? "text-inherit" : "text-neutral-500"
+                  }`}
+                >
+                  <option value="">請選擇需求</option>
+                  <option value="融資二胎">融資二胎</option>
+                  <option value="民間二胎">民間二胎</option>
+                  <option value="汽機車借款">汽機車借款</option>
+                  <option value="代書借款">代書借款</option>
+                  <option value="小額借款">小額借款</option>
+                </select>
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="none"
+                  aria-hidden="true"
+                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 opacity-60"
+                >
+                  <path
+                    d="M5 7.5L10 12.5L15 7.5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
             </div>
             <div>
               <div className="flex items-baseline justify-between gap-2 mb-2">
@@ -176,7 +217,7 @@ export default function ContactCard() {
                   htmlFor="contact-requirements"
                   className="block text-xs font-mono uppercase tracking-widest opacity-60"
                 >
-                  需求
+                  備註（選填）
                 </label>
                 <span
                   className="text-xs tabular-nums opacity-50"
@@ -193,7 +234,6 @@ export default function ContactCard() {
                     e.target.value.slice(0, CONTACT_REQUIREMENTS_MAX_CHARS),
                   )
                 }
-                required
                 maxLength={CONTACT_REQUIREMENTS_MAX_CHARS}
                 rows={4}
                 suppressHydrationWarning

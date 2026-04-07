@@ -5,7 +5,7 @@
  *
  * 聯絡表單（POST JSON）：Next.js /api/contact 轉發至此網址
  * Script 屬性：CONTACT_SECRET（與 .env CONTACT_GAS_SECRET 一致）
- * 試算表 CONTACT：第一列為欄位 key（timestamp, name, phone, email, requirements），寫入時依欄名對應，欄序可調整
+ * 試算表 CONTACT：第一列為欄位 key（timestamp, name, phone, email, demand, requirements），寫入時依欄名對應，欄序可調整
  * 通知信：寄至 Web App 執行身分（您本人）信箱，寄件者為您的 Google 帳號
  *
  * 若錯誤提示沒有 MailApp.sendEmail 權限：在編輯器執行一次 authorizeMailAppOnce() 完成 OAuth（檔案底部）。
@@ -13,6 +13,7 @@
 const SHEET_NAME = "NEWS";
 const CONTACT_SHEET_NAME = "CONTACT";
 const DRIVE_COVERS_FOLDER_ID = "1VtuTtomdrT10AqZ5Ii6baeADVzWnbr7w";
+const CONTACT_REQUIREMENTS_MAX_CHARS = 100;
 
 function doGet(e) {
   const action = e.parameter.action || "list";
@@ -62,11 +63,18 @@ function doPost(e) {
     name: String(fields.name || "").trim(),
     phone: String(fields.phone || "").trim(),
     email: String(fields.email || "").trim(),
+    demand: String(fields.demand || "").trim(),
     requirements: String(fields.requirements || "").trim(),
   };
 
-  if (!record.name || !record.phone || !record.email || !record.requirements) {
+  if (!record.name || !record.phone) {
     return jsonOutput({ ok: false, error: "Missing fields" });
+  }
+  if (record.requirements.length > CONTACT_REQUIREMENTS_MAX_CHARS) {
+    return jsonOutput({
+      ok: false,
+      error: "Requirements too long (max " + CONTACT_REQUIREMENTS_MAX_CHARS + ")",
+    });
   }
 
   try {
@@ -87,6 +95,7 @@ const CONTACT_DEFAULT_KEYS = [
   "name",
   "phone",
   "email",
+  "demand",
   "requirements",
 ];
 
@@ -178,13 +187,15 @@ function sendContactNotifyEmail(record) {
     record.phone +
     "\n" +
     "電子郵件　" +
-    record.email +
+    (record.email || "未填寫") +
+    "\n" +
+    "需求分類　" +
+    (record.demand || "未填寫") +
     "\n\n" +
-    "諮詢內容\n" +
-    record.requirements +
+    "備註內容\n" +
+    (record.requirements || "未填寫") +
     "\n" +
     "━━━━━━━━━━━━━━━━━━━━\n\n" +
-    "請使用郵件「回覆」功能直接聯繫對方，回覆將寄至對方所留信箱。\n\n" +
     "──\n" +
     "本信由網站表單系統自動發送，請勿直接轉寄內含個資之內容至公開管道。\n";
 
@@ -212,25 +223,27 @@ function sendContactNotifyEmail(record) {
     htmlTableRow("提交時間", h(submittedAt) + "（台北時間）") +
     htmlTableRow("聯絡姓名", h(record.name)) +
     htmlTableRow("聯絡電話", h(record.phone)) +
-    htmlTableRow("電子郵件", h(record.email)) +
+    htmlTableRow("電子郵件", h(record.email || "未填寫")) +
+    htmlTableRow("需求分類", h(record.demand || "未填寫")) +
     htmlTableRow(
-      "諮詢內容",
+      "備註內容",
       '<div style="white-space:pre-wrap;word-break:break-word;">' +
-        h(record.requirements).replace(/\r\n|\n|\r/g, "<br>") +
+        h(record.requirements || "未填寫").replace(/\r\n|\n|\r/g, "<br>") +
         "</div>",
     ) +
     "</table>" +
-    '<p style="margin:0;font-size:12px;color:#71717a;line-height:1.5;text-align:left;">請使用「回覆」與填表人聯繫。本信由系統自動發送。</p>' +
+    '<p style="margin:0;font-size:12px;color:#71717a;line-height:1.5;text-align:left;">本信由系統自動發送。</p>' +
     "</div>" +
     "</td></tr></table>";
 
-  MailApp.sendEmail({
+  const mailOptions = {
     to: to,
-    replyTo: record.email,
     subject: subject,
     body: textBody,
     htmlBody: htmlBody,
-  });
+  };
+  if (record.email) mailOptions.replyTo = record.email;
+  MailApp.sendEmail(mailOptions);
 }
 
 function getSheet() {

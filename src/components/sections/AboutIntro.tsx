@@ -9,14 +9,15 @@ export default function AboutIntro() {
         <SectionTitle title="關於我們" subtitle="認識謙謙資產管理顧問" />
         <div className="md:max-w-3xl md:mx-auto md:text-center">
           <p className="text-neutral-600 mb-6">
-            公司簡介文字內容，介紹謙謙資產管理顧問的成立背景、經營理念與核心價值。
+            {/* 公司簡介文字內容，介紹謙謙資產管理顧問的成立背景、經營理念與核心價值。 */}
+            我們提供房屋二胎、代書信貸、融資二胎、民間二胎、汽機車借款、小額借款等服務。
           </p>
-          <p className="text-neutral-600 mb-8">
+          {/* <p className="text-neutral-600 mb-8">
             更多關於團隊、服務範圍與專業能力的說明。
-          </p>
+          </p> */}
           {/* <Button>了解更多</Button> */}
           {/* Contact info */}
-          <div className="grid sm:grid-cols-2 gap-6 max-md:max-w-sm max-md:mx-auto">
+          {/* <div className="grid sm:grid-cols-2 gap-6 max-md:max-w-sm max-md:mx-auto">
             {[
               { label: "公司地址", value: "新北市板橋區長安街307號" },
               { label: "公司電話", value: "02-2901-2345" },
@@ -32,7 +33,7 @@ export default function AboutIntro() {
                 </div>
               </Card>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
