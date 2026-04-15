@@ -18,8 +18,8 @@ export const DEAL_MARQUEE_CITIES = [
   "南投",
   "雲林",
   "屏東",
-  "澎湖",
-  "金門",
+  // "澎湖",
+  // "金門",
 ] as const;
 
 export const DEAL_MARQUEE_HONORIFICS = ["先生", "小姐"] as const;

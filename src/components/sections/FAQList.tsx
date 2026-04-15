@@ -14,8 +14,12 @@ import {
 import SectionTitle from "@/components/ui/SectionTitle";
 
 const FAQ_CATEGORIES = [
-  { id: "finance-mortgage", label: "融資二胎", icon: HiOutlineHome },
-  { id: "private-mortgage", label: "民間二胎", icon: HiOutlineArrowsRightLeft },
+  { id: "finance-mortgage", label: "房屋融資二胎", icon: HiOutlineHome },
+  {
+    id: "private-mortgage",
+    label: "民間融資二胎",
+    icon: HiOutlineArrowsRightLeft,
+  },
   { id: "vehicle-loan", label: "汽機車借款", icon: HiOutlineTruck },
   { id: "scrivener-credit", label: "代書信貸", icon: HiOutlineUser },
   { id: "small-loan", label: "小額借款", icon: HiOutlineCurrencyDollar },
@@ -24,24 +28,24 @@ const FAQ_CATEGORIES = [
 const FAQ_DATA: Record<string, { question: string; answer: string }[]> = {
   "finance-mortgage": [
     {
-      question: "融資二胎可以貸多少？",
+      question: "房屋融資二胎可以貸多少？",
       answer:
         "實際額度會依房屋鑑價、原房貸餘額、信用條件與收入狀況評估。一般會先試算可貸空間，再規劃最適合的期數與月付金。",
     },
     {
-      question: "融資二胎審核重點是什麼？",
+      question: "房屋融資二胎審核重點是什麼？",
       answer:
         "重點通常包含房屋條件、借款人信用紀錄、收入穩定度與負債比。資料越完整，越有助於提高核准效率與條件。",
     },
   ],
   "private-mortgage": [
     {
-      question: "民間二胎的申辦速度快嗎？",
+      question: "民間融資二胎的申辦速度快嗎？",
       answer:
-        "相較傳統金融機構，民間二胎流程通常較快，若文件齊全且擔保條件明確，常可在短時間內完成審核與撥款。",
+        "相較傳統金融機構，民間融資二胎流程通常較快，若文件齊全且擔保條件明確，常可在短時間內完成審核與撥款。",
     },
     {
-      question: "申請民間二胎要注意什麼？",
+      question: "申請民間融資二胎要注意什麼？",
       answer:
         "建議先確認年利率、總費用年百分率、違約條款與提前清償規定，並比較不同方案，避免後續還款壓力過大。",
     },
@@ -98,7 +102,7 @@ export default function FAQList() {
   return (
     <section id="faq" className="py-20">
       <div className="max-w-6xl mx-auto px-6">
-        <SectionTitle title="貸款問題" />
+        <SectionTitle title="常見問題" />
         <div className="flex justify-center items-center flex-wrap gap-4 mb-8">
           {FAQ_CATEGORIES.map((item) => {
             const isActive = activeCategory === item.id;

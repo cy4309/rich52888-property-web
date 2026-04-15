@@ -37,7 +37,7 @@ const NAV_ITEMS = [
   },
   {
     href: "/#faq",
-    label: "貸款問題",
+    label: "常見問題",
     icon: HiOutlineQuestionMarkCircle,
     section: "faq" as const,
   },

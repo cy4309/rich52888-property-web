@@ -2,11 +2,7 @@
 
 import { useState } from "react";
 import { SiLine } from "react-icons/si";
-import { BsHeadset } from "react-icons/bs";
-import {
-  HiOutlinePhone,
-  HiOutlineXMark,
-} from "react-icons/hi2";
+import { HiOutlinePhone, HiOutlineXMark } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
 
 /** 可改為實際聯絡資訊 */
@@ -131,11 +127,11 @@ export default function FloatingContactCard() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#C8A25A] text-white shadow-lg shadow-black/15 transition-transform hover:scale-105 hover:opacity-95 active:scale-95"
+          className="flex h-14 w-14 items-center justify-center rounded-full bg-[#06C755] text-white shadow-lg shadow-black/15 transition-transform hover:scale-105 hover:opacity-95 active:scale-95"
           aria-label="開啟聯絡資訊"
           aria-expanded={open}
         >
-          <BsHeadset className="h-7 w-7" aria-hidden />
+          <SiLine className="h-7 w-7" aria-hidden />
         </button>
       )}
     </div>

@@ -3,36 +3,43 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
 import {
   HiOutlineHome,
+  HiOutlineArrowsRightLeft,
+  HiOutlineTruck,
+  HiOutlineUser,
   HiOutlineCurrencyDollar,
-  // HiOutlineArrowTrendingUp,
-  // HiOutlineShieldCheck,
 } from "react-icons/hi2";
 
 const SERVICES_DATA = [
   {
-    id: "mortgage",
-    title: "房屋二胎",
-    description: "整合多元管道，提供最適合您的房屋二胎方案。",
+    id: "house-second-mortgage",
+    title: "房屋融資二胎",
+    description: "整合多元管道，提供最適合您的房屋融資二胎方案。",
     icon: HiOutlineHome,
   },
   {
-    id: "credit",
+    id: "private-second-mortgage",
+    title: "民間融資二胎",
+    description: "依照需求彈性規劃，快速媒合民間融資二胎方案。",
+    icon: HiOutlineArrowsRightLeft,
+  },
+  {
+    id: "vehicle-loan",
+    title: "汽機車借款",
+    description: "汽車與機車皆可評估，提供即時且彈性的借款服務。",
+    icon: HiOutlineTruck,
+  },
+  {
+    id: "scrivener-credit-loan",
     title: "代書信貸",
     description: "快速便捷的資金周轉，代書信貸方案。",
+    icon: HiOutlineUser,
+  },
+  {
+    id: "small-loan",
+    title: "小額借款",
+    description: "小額資金需求快速申辦，協助解決短期週轉壓力。",
     icon: HiOutlineCurrencyDollar,
   },
-  // {
-  //   id: "investment",
-  //   title: "投資顧問",
-  //   description: "精準分析市場趨勢，量身打造資產增值策略。",
-  //   icon: HiOutlineArrowTrendingUp,
-  // },
-  // {
-  //   id: "risk",
-  //   title: "風險管理",
-  //   description: "全方位評估潛在財務風險，守護您的資本安全。",
-  //   icon: HiOutlineShieldCheck,
-  // },
 ];
 
 export default function ServiceGrid() {
@@ -49,12 +56,12 @@ export default function ServiceGrid() {
           {SERVICES_DATA.map((item) => (
             <Card key={item.id}>
               <div className="p-6">
-                <div className="w-12 h-12 rounded-2xl bg-primary flex items-center justify-center mb-4">
-                  <item.icon className="w-6 h-6 text-white" />
+                <div className="mb-4 flex items-center gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl bg-primary/20 text-primary">
+                    <item.icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="font-bold text-deep text-lg">{item.title}</h3>
                 </div>
-                <h3 className="font-bold text-deep text-lg mb-2">
-                  {item.title}
-                </h3>
                 <p className="text-sm text-neutral-600 leading-relaxed">
                   {item.description}
                 </p>

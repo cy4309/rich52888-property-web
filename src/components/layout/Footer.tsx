@@ -3,7 +3,7 @@ import Link from "next/link";
 const NAV_LINKS = [
   { href: "/#services", label: "服務項目" },
   { href: "/#news", label: "最新消息" },
-  { href: "/#faq", label: "貸款問題" },
+  { href: "/#faq", label: "常見問題" },
   { href: "/#about", label: "關於我們" },
 ];
 

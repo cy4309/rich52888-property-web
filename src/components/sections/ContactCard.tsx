@@ -15,15 +15,20 @@ export default function ContactCard() {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [validationError, setValidationError] = useState("");
+  const fieldClassName =
+    "w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm font-inter text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-slate-400 transition-colors";
+  const sanitizePhoneInput = (value: string) => value.replace(/\D/g, "");
+  const sanitizeEmailInput = (value: string) =>
+    value.replace(/[^A-Za-z0-9@._-]/g, "");
 
   const isValidPhone = (value: string) => {
     const v = value.trim();
     if (!v || v.length > 32) return false;
-    return v.replace(/\D/g, "").length >= 8;
+    return /^\d{8,32}$/.test(v);
   };
 
   const isValidEmail = (value: string) =>
-    /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    /^[A-Za-z0-9._-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(value);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,12 +46,12 @@ export default function ContactCard() {
     }
 
     if (!isValidPhone(trimmedPhone)) {
-      setValidationError("請填寫有效的電話號碼（至少 8 碼數字）");
+      setValidationError("電話僅能輸入數字（8 到 32 碼），不可包含特殊符號");
       return;
     }
 
     if (trimmedEmail && !isValidEmail(trimmedEmail)) {
-      setValidationError("請填寫有效的電子郵件地址");
+      setValidationError("電子郵件格式錯誤，且不可包含特殊符號");
       return;
     }
 
@@ -104,7 +109,7 @@ export default function ContactCard() {
       <div className="max-w-6xl mx-auto px-6">
         <SectionTitle
           title="立即諮詢"
-          subtitle="歡迎直接填寫表單與我們聯繫，或直接撥打電話，或加LINE洽詢"
+          subtitle="歡迎直接填寫表單與我們聯繫，或點擊右下角浮動按鈕直接撥打電話、加LINE洽詢"
         />
         {/* Requirements form */}
         <form
@@ -131,7 +136,7 @@ export default function ContactCard() {
                 onChange={(e) => setName(e.target.value)}
                 required
                 suppressHydrationWarning
-                className="w-full rounded-2xl border border-white/20 px-4 py-3 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors"
+                className={fieldClassName}
               />
             </div>
             <div>
@@ -147,10 +152,10 @@ export default function ContactCard() {
                 inputMode="tel"
                 autoComplete="tel"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                onChange={(e) => setPhone(sanitizePhoneInput(e.target.value))}
                 required
                 suppressHydrationWarning
-                className="w-full rounded-2xl border border-white/20 px-4 py-3 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors"
+                className={fieldClassName}
               />
             </div>
             <div>
@@ -166,9 +171,9 @@ export default function ContactCard() {
                 inputMode="email"
                 autoComplete="email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => setEmail(sanitizeEmailInput(e.target.value))}
                 suppressHydrationWarning
-                className="w-full rounded-2xl border border-white/20 px-4 py-3 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors"
+                className={fieldClassName}
               />
             </div>
             <div>
@@ -184,13 +189,11 @@ export default function ContactCard() {
                   value={demand}
                   onChange={(e) => setDemand(e.target.value)}
                   suppressHydrationWarning
-                  className={`w-full rounded-2xl border border-white/20 px-4 py-3 pr-10 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors appearance-none ${
-                    demand ? "text-inherit" : "text-neutral-500"
-                  }`}
+                  className={`${fieldClassName} appearance-none pr-10`}
                 >
                   <option value="">請選擇需求</option>
-                  <option value="融資二胎">融資二胎</option>
-                  <option value="民間二胎">民間二胎</option>
+                  <option value="房屋融資二胎">房屋融資二胎</option>
+                  <option value="民間融資二胎">民間融資二胎</option>
                   <option value="汽機車借款">汽機車借款</option>
                   <option value="代書借款">代書借款</option>
                   <option value="小額借款">小額借款</option>
@@ -237,7 +240,7 @@ export default function ContactCard() {
                 maxLength={CONTACT_REQUIREMENTS_MAX_CHARS}
                 rows={4}
                 suppressHydrationWarning
-                className="w-full rounded-2xl border border-white/20 px-4 py-3 text-sm font-inter focus:outline-none focus:border-white/40 transition-colors resize-none"
+                className={`${fieldClassName} resize-none`}
               />
             </div>
             <Button
