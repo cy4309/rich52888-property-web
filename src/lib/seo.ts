@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 
 const siteName = "謙謙資產管理顧問";
-export const baseUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://example.com";
+const primarySiteUrl = "https://rich52888.com";
+/**
+ * SEO canonical 一律以主網域為準；備援網域（如 vercel.app）可正常瀏覽，但不作為 canonical。
+ */
+export const baseUrl = process.env.NEXT_PUBLIC_SITE_URL ?? primarySiteUrl;
 const ogImagePath = "/logo.png";
 
 type GeneratePageMetadataParams = {
