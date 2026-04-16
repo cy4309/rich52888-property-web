@@ -4,6 +4,7 @@ import { useState } from "react";
 import { SiLine } from "react-icons/si";
 import { HiOutlinePhone, HiOutlineXMark } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/ga";
 
 /** 可改為實際聯絡資訊 */
 const CONTACTS = [
@@ -98,6 +99,13 @@ export default function FloatingContactCard() {
               href={c.lineUrl}
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackEvent("contact_channel_click", {
+                  source: "floating_card",
+                  channel: "line",
+                  consultant_id: c.id,
+                })
+              }
               className="flex items-center gap-3 rounded-xl border border-neutral-100 bg-neutral-50/80 px-3 py-3 text-sm text-deep transition-colors hover:border-primary/30 hover:bg-primary/5"
             >
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#06C755] text-white">
@@ -111,6 +119,13 @@ export default function FloatingContactCard() {
 
             <a
               href={`tel:${c.phoneTel}`}
+              onClick={() =>
+                trackEvent("contact_channel_click", {
+                  source: "floating_card",
+                  channel: "phone",
+                  consultant_id: c.id,
+                })
+              }
               className="flex items-center gap-3 rounded-xl border border-neutral-100 bg-neutral-50/80 px-3 py-3 text-sm text-deep transition-colors hover:border-primary/30 hover:bg-primary/5"
             >
               <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-primary/15 text-primary">

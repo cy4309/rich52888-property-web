@@ -3,6 +3,7 @@ import Link from "next/link";
 import { getNewsBySlug } from "@/lib/sheet";
 import { generatePageMetadata } from "@/lib/seo";
 import { FaArrowLeft } from "react-icons/fa";
+import NewsReadTracker from "@/components/analytics/NewsReadTracker";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -31,6 +32,7 @@ export default async function NewsSlugPage({ params }: Props) {
   return (
     <article className="bg-neutral-50 min-h-screen py-20">
       <div className="max-w-6xl mx-auto px-6">
+        <NewsReadTracker slug={slug} />
         <Link
           href="/news"
           className="text-primary hover:opacity-90 mb-6 flex items-center gap-2"

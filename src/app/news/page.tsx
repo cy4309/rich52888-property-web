@@ -4,6 +4,7 @@ import { getNews } from "@/lib/sheet";
 import { generatePageMetadata } from "@/lib/seo";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
+import TrackedLink from "@/components/analytics/TrackedLink";
 
 export const metadata = generatePageMetadata({
   title: "最新消息",
@@ -27,7 +28,12 @@ export default async function NewsPage() {
         <SectionTitle title="最新消息" subtitle="掌握最新動態" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item) => (
-            <Link key={item.id} href={`/news/${item.slug}`}>
+            <TrackedLink
+              key={item.id}
+              href={`/news/${item.slug}`}
+              eventName="news_card_click"
+              eventParams={{ source: "news_list", news_slug: item.slug }}
+            >
               <Card>
                 <div className="aspect-video bg-neutral-100">
                   {item.cover && (
@@ -46,7 +52,7 @@ export default async function NewsPage() {
                   <span className="text-xs text-neutral-400">{item.date}</span>
                 </div>
               </Card>
-            </Link>
+            </TrackedLink>
           ))}
         </div>
         {items.length === 0 && (

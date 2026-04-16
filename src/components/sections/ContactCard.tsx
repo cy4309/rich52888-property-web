@@ -4,6 +4,7 @@ import { useState } from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
 import { CONTACT_REQUIREMENTS_MAX_CHARS } from "@/lib/contact-limits";
+import { trackEvent } from "@/lib/ga";
 
 export default function ContactCard() {
   const [name, setName] = useState("");
@@ -42,21 +43,37 @@ export default function ContactCard() {
 
     if (!trimmedName || !trimmedPhone) {
       setValidationError("請填寫完整表單");
+      trackEvent("form_submit_error", {
+        form_name: "contact_form",
+        error_type: "validation",
+      });
       return;
     }
 
     if (!isValidPhone(trimmedPhone)) {
       setValidationError("電話僅能輸入數字（8 到 32 碼），不可包含特殊符號");
+      trackEvent("form_submit_error", {
+        form_name: "contact_form",
+        error_type: "validation",
+      });
       return;
     }
 
     if (trimmedEmail && !isValidEmail(trimmedEmail)) {
       setValidationError("電子郵件格式錯誤，且不可包含特殊符號");
+      trackEvent("form_submit_error", {
+        form_name: "contact_form",
+        error_type: "validation",
+      });
       return;
     }
 
     if (trimmedRequirements.length > CONTACT_REQUIREMENTS_MAX_CHARS) {
       setValidationError(`備註最多 ${CONTACT_REQUIREMENTS_MAX_CHARS} 字`);
+      trackEvent("form_submit_error", {
+        form_name: "contact_form",
+        error_type: "validation",
+      });
       return;
     }
 
@@ -81,6 +98,11 @@ export default function ContactCard() {
       if (!res.ok) {
         throw new Error(data.error ?? "提交失敗");
       }
+      trackEvent("generate_lead", {
+        lead_type: "contact_form",
+        source: "contact_section",
+        demand_type: trimmedDemand || "unspecified",
+      });
       setStatus("success");
       setName("");
       setPhone("");
@@ -91,6 +113,10 @@ export default function ContactCard() {
     } catch (caught) {
       const message =
         caught instanceof Error && caught.message ? caught.message : "提交失敗";
+      trackEvent("form_submit_error", {
+        form_name: "contact_form",
+        error_type: "api",
+      });
       setValidationError(message);
       setStatus("error");
       setTimeout(() => {

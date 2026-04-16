@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/ga";
 
 const NAV_LINKS = [
   { href: "/#services", label: "服務項目" },
@@ -76,6 +77,12 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
+                onClick={() =>
+                  trackEvent("section_nav_click", {
+                    source: "navbar_desktop",
+                    target: href.replace("/#", ""),
+                  })
+                }
                 className={cn(
                   "text-neutral-600 hover:text-[#C8A25A] transition-colors",
                   isActive ? "font-semibold text-[#C8A25A]" : undefined,
@@ -87,6 +94,12 @@ export default function Navbar() {
           })}
           <Link
             href="/#contact"
+            onClick={() =>
+              trackEvent("contact_cta_click", {
+                source: "navbar_desktop",
+                target: "contact_section",
+              })
+            }
             className="ml-4 bg-[#C8A25A] text-white rounded-2xl px-4 py-2 hover:opacity-90 transition-opacity font-medium"
           >
             立即諮詢
@@ -119,7 +132,13 @@ export default function Navbar() {
                 <Link
                   key={href}
                   href={href}
-                  onClick={() => setMobileOpen(false)}
+                  onClick={() => {
+                    trackEvent("section_nav_click", {
+                      source: "navbar_mobile",
+                      target: href.replace("/#", ""),
+                    });
+                    setMobileOpen(false);
+                  }}
                   className={cn(
                     "py-3 px-4 rounded-2xl text-neutral-600 hover:text-[#C8A25A] hover:bg-neutral-50",
                     isActive
@@ -133,7 +152,13 @@ export default function Navbar() {
             })}
             <Link
               href="/#contact"
-              onClick={() => setMobileOpen(false)}
+              onClick={() => {
+                trackEvent("contact_cta_click", {
+                  source: "navbar_mobile",
+                  target: "contact_section",
+                });
+                setMobileOpen(false);
+              }}
               className="mt-2 py-3 px-4 bg-[#C8A25A] text-white rounded-2xl text-center font-medium hover:opacity-90"
             >
               立即諮詢

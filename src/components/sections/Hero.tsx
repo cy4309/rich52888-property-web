@@ -1,6 +1,8 @@
-import Link from "next/link";
+"use client";
+
 import { buttonVariants } from "@/components/ui/Button";
 import { FaArrowRight } from "react-icons/fa";
+import TrackedLink from "@/components/analytics/TrackedLink";
 
 export default function Hero() {
   return (
@@ -19,8 +21,10 @@ export default function Hero() {
             為您提供最精準的資產活化諮詢。無論是房貸優化或資金周轉，我們以專業誠信，助您成就財富增值。
           </p>
           <div className="flex gap-4 justify-center">
-            <Link
+            <TrackedLink
               href="/#contact"
+              eventName="contact_cta_click"
+              eventParams={{ source: "hero", target: "contact_section" }}
               className={buttonVariants(
                 "primary",
                 "w-2/3 flex items-center justify-center gap-2",
@@ -28,9 +32,11 @@ export default function Hero() {
             >
               立即諮詢
               <FaArrowRight />
-            </Link>
-            <Link
+            </TrackedLink>
+            <TrackedLink
               href="/#services"
+              eventName="service_interest_click"
+              eventParams={{ source: "hero", target: "services_section" }}
               className={buttonVariants(
                 "outline",
                 "w-1/3 flex items-center justify-center gap-2",
@@ -38,7 +44,7 @@ export default function Hero() {
             >
               服務
               <FaArrowRight />
-            </Link>
+            </TrackedLink>
           </div>
         </div>
       </div>

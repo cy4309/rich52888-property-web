@@ -11,6 +11,7 @@ import {
 } from "react-icons/hi2";
 import { HiOutlineBriefcase } from "react-icons/hi";
 import { cn } from "@/lib/utils";
+import { trackEvent } from "@/lib/ga";
 
 /** 與首頁 /#xxx 錨點一致（捲動偵測） */
 const SECTION_IDS = ["services", "news", "faq", "about", "contact"] as const;
@@ -124,6 +125,12 @@ export default function BottomNav() {
               <Link
                 key={href}
                 href={href}
+                onClick={() =>
+                  trackEvent("contact_cta_click", {
+                    source: "bottom_nav",
+                    target: "contact_section",
+                  })
+                }
                 className="flex flex-col items-center justify-center -mt-6"
               >
                 <div className="w-14 h-14 rounded-full bg-[#C8A25A] flex items-center justify-center shadow-lg shadow-black/10">
@@ -140,6 +147,12 @@ export default function BottomNav() {
             <Link
               key={href}
               href={linkHref}
+              onClick={() =>
+                trackEvent("section_nav_click", {
+                  source: "bottom_nav",
+                  target: section,
+                })
+              }
               className="flex flex-col items-center justify-center gap-0.5 min-w-[4rem]"
             >
               <Icon
