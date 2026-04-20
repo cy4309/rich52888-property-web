@@ -63,7 +63,7 @@ export default function Navbar() {
           />
           <div className="flex flex-col min-w-0">
             <div className="font-bold text-deep">謙謙資產管理顧問</div>
-            <div className="text-xs text-neutral-500">
+            <div className="text-[8px] font-bold text-neutral-500">
               RICH52888 ASSET MANAGEMENT
             </div>
           </div>
@@ -84,8 +84,8 @@ export default function Navbar() {
                   })
                 }
                 className={cn(
-                  "text-neutral-600 hover:text-[#C8A25A] transition-colors",
-                  isActive ? "font-semibold text-[#C8A25A]" : undefined,
+                  "font-bold text-neutral-600 hover:text-primary transition-colors",
+                  isActive ? "font-semibold text-primary" : undefined,
                 )}
               >
                 {label}
@@ -100,7 +100,7 @@ export default function Navbar() {
                 target: "contact_section",
               })
             }
-            className="ml-4 bg-[#C8A25A] text-white rounded-2xl px-4 py-2 hover:opacity-90 transition-opacity font-medium"
+            className="ml-4 bg-primary text-white rounded-2xl px-4 py-2 hover:opacity-90 transition-opacity font-bold"
           >
             立即諮詢
           </Link>
@@ -110,7 +110,7 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2 text-neutral-600 hover:text-[#C8A25A]"
+            className="p-2 text-neutral-600 hover:text-primary"
             aria-label={mobileOpen ? "關閉選單" : "開啟選單"}
           >
             {mobileOpen ? (
@@ -140,9 +140,9 @@ export default function Navbar() {
                     setMobileOpen(false);
                   }}
                   className={cn(
-                    "py-3 px-4 rounded-2xl text-neutral-600 hover:text-[#C8A25A] hover:bg-neutral-50",
+                    "py-3 px-4 rounded-2xl font-bold text-neutral-600 hover:text-primary hover:bg-neutral-50",
                     isActive
-                      ? "font-semibold text-[#C8A25A] bg-[#C8A25A]/5"
+                      ? "font-semibold text-primary bg-primary/5"
                       : undefined,
                   )}
                 >
@@ -159,7 +159,7 @@ export default function Navbar() {
                 });
                 setMobileOpen(false);
               }}
-              className="mt-2 py-3 px-4 bg-[#C8A25A] text-white rounded-2xl text-center font-medium hover:opacity-90"
+              className="mt-2 py-3 px-4 bg-primary text-white rounded-2xl text-center font-bold hover:opacity-90"
             >
               立即諮詢
             </Link>

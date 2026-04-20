@@ -14,14 +14,14 @@ export default function Footer() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <nav className="hidden lg:flex flex-wrap gap-6">
-              <div className="text-sm">
+              <div className="text-[10px] font-bold">
                 <p>© RICH52888</p>
               </div>
               {NAV_LINKS.map(({ href, label }) => (
                 <Link
                   key={href}
                   href={href}
-                  className="text-sm hover:text-[#C8A25A] transition-colors"
+                  className="text-sm font-bold hover:text-primary transition-colors"
                 >
                   {label}
                 </Link>

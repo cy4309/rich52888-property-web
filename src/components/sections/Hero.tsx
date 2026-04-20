@@ -17,7 +17,7 @@ export default function Hero() {
             <h1 className="text-4xl font-bold text-primary">房產及資金規劃</h1>
             <p className="text-4xl font-bold text-white">方案</p>
           </div>
-          <p className="text-neutral-600 max-w-2xl">
+          <p className="text-neutral-500 max-w-2xl font-bold">
             為您提供最精準的資產活化諮詢。無論是房貸優化或資金周轉，我們以專業誠信，助您成就財富增值。
           </p>
           <div className="flex gap-4 justify-center">

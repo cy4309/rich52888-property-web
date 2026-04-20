@@ -60,7 +60,7 @@ export default function FloatingContactCard() {
             <p className="mb-2 text-xs text-neutral-500">切換聯絡人</p>
             <div className="relative flex h-10 w-full rounded-full bg-neutral-100 p-1">
               <div
-                className="pointer-events-none absolute left-1 top-1 h-8 w-[calc(50%-6px)] rounded-full bg-[#C8A25A] shadow-sm transition-transform duration-200 ease-out"
+                className="pointer-events-none absolute left-1 top-1 h-8 w-[calc(50%-6px)] rounded-full bg-primary shadow-sm transition-transform duration-200 ease-out"
                 style={{
                   transform:
                     activeIndex === 1

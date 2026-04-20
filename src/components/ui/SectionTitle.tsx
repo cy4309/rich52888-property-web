@@ -17,7 +17,9 @@ export default function SectionTitle({
         <div className="w-2 shrink-0 self-stretch rounded-full bg-primary" />
         <div>
           <h2 className="text-2xl font-bold text-deep">{title}</h2>
-          {subtitle && <p className="mt-2 text-neutral-500">{subtitle}</p>}
+          {subtitle && (
+            <p className="mt-2 text-sm text-neutral-500">{subtitle}</p>
+          )}
         </div>
       </div>
     </div>

@@ -133,7 +133,7 @@ export default function BottomNav() {
                 }
                 className="flex flex-col items-center justify-center -mt-6"
               >
-                <div className="w-14 h-14 rounded-full bg-[#C8A25A] flex items-center justify-center shadow-lg shadow-black/10">
+                <div className="w-14 h-14 rounded-full bg-primary flex items-center justify-center shadow-lg shadow-black/10">
                   <Icon className="w-6 h-6 text-white" />
                 </div>
               </Link>
@@ -158,13 +158,13 @@ export default function BottomNav() {
               <Icon
                 className={cn(
                   "w-6 h-6",
-                  isActive ? "text-[#C8A25A]" : "text-neutral-400",
+                  isActive ? "text-primary" : "text-neutral-400",
                 )}
               />
               <span
                 className={cn(
                   "text-xs",
-                  isActive ? "text-[#C8A25A] font-medium" : "text-neutral-400",
+                  isActive ? "text-primary font-medium" : "text-neutral-400",
                 )}
               >
                 {label}

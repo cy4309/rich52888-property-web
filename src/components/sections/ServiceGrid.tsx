@@ -3,7 +3,6 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
 import {
   HiOutlineHome,
-  HiOutlineArrowsRightLeft,
   HiOutlineTruck,
   HiOutlineUser,
   HiOutlineCurrencyDollar,
@@ -12,15 +11,9 @@ import {
 const SERVICES_DATA = [
   {
     id: "house-second-mortgage",
-    title: "房屋融資二胎",
-    description: "整合多元管道，提供最適合您的房屋融資二胎方案。",
+    title: "房屋二胎",
+    description: "整合多元管道，依需求彈性規劃最適合您的房屋二胎方案。",
     icon: HiOutlineHome,
-  },
-  {
-    id: "private-second-mortgage",
-    title: "民間融資二胎",
-    description: "依照需求彈性規劃，快速媒合民間融資二胎方案。",
-    icon: HiOutlineArrowsRightLeft,
   },
   {
     id: "vehicle-loan",

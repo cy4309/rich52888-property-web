@@ -10,7 +10,7 @@ export default function AboutIntro() {
         <div className="md:max-w-3xl md:mx-auto md:text-center">
           <p className="text-neutral-600 mb-6">
             {/* 公司簡介文字內容，介紹謙謙資產管理顧問的成立背景、經營理念與核心價值。 */}
-            我們提供房屋融資二胎、代書信貸、房屋融資二胎、民間融資二胎、汽機車借款、小額借款等服務。
+            我們提供房屋二胎、汽機車借款、代書信貸、小額借款等服務。
           </p>
           {/* <p className="text-neutral-600 mb-8">
             更多關於團隊、服務範圍與專業能力的說明。

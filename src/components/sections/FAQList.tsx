@@ -4,7 +4,6 @@ import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
   HiOutlineUser,
-  HiOutlineArrowsRightLeft,
   HiOutlineTruck,
   HiOutlineHome,
   HiOutlineCurrencyDollar,
@@ -14,38 +13,31 @@ import {
 import SectionTitle from "@/components/ui/SectionTitle";
 
 const FAQ_CATEGORIES = [
-  { id: "finance-mortgage", label: "房屋融資二胎", icon: HiOutlineHome },
-  {
-    id: "private-mortgage",
-    label: "民間融資二胎",
-    icon: HiOutlineArrowsRightLeft,
-  },
+  { id: "house-second-mortgage", label: "房屋二胎", icon: HiOutlineHome },
   { id: "vehicle-loan", label: "汽機車借款", icon: HiOutlineTruck },
   { id: "scrivener-credit", label: "代書信貸", icon: HiOutlineUser },
   { id: "small-loan", label: "小額借款", icon: HiOutlineCurrencyDollar },
 ];
 
 const FAQ_DATA: Record<string, { question: string; answer: string }[]> = {
-  "finance-mortgage": [
+  "house-second-mortgage": [
     {
-      question: "房屋融資二胎可以貸多少？",
+      question: "房屋二胎可以貸多少？",
       answer:
         "實際額度會依房屋鑑價、原房貸餘額、信用條件與收入狀況評估。一般會先試算可貸空間，再規劃最適合的期數與月付金。",
     },
     {
-      question: "房屋融資二胎審核重點是什麼？",
+      question: "房屋二胎審核重點是什麼？",
       answer:
         "重點通常包含房屋條件、借款人信用紀錄、收入穩定度與負債比。資料越完整，越有助於提高核准效率與條件。",
     },
-  ],
-  "private-mortgage": [
     {
-      question: "民間融資二胎的申辦速度快嗎？",
+      question: "房屋二胎的申辦速度快嗎？",
       answer:
-        "相較傳統金融機構，民間融資二胎流程通常較快，若文件齊全且擔保條件明確，常可在短時間內完成審核與撥款。",
+        "相較傳統金融機構，部分房屋二胎方案流程通常較快，若文件齊全且擔保條件明確，常可在短時間內完成審核與撥款。",
     },
     {
-      question: "申請民間融資二胎要注意什麼？",
+      question: "申請房屋二胎要注意什麼？",
       answer:
         "建議先確認年利率、總費用年百分率、違約條款與提前清償規定，並比較不同方案，避免後續還款壓力過大。",
     },
@@ -89,7 +81,7 @@ const FAQ_DATA: Record<string, { question: string; answer: string }[]> = {
 };
 
 export default function FAQList() {
-  const [activeCategory, setActiveCategory] = useState("finance-mortgage");
+  const [activeCategory, setActiveCategory] = useState("house-second-mortgage");
   const [expandedIndex, setExpandedIndex] = useState<number | null>(0);
 
   const faqs = FAQ_DATA[activeCategory] ?? [];
@@ -103,7 +95,7 @@ export default function FAQList() {
     <section id="faq" className="py-20">
       <div className="max-w-6xl mx-auto px-6">
         <SectionTitle title="常見問題" />
-        <div className="flex justify-center items-center flex-wrap gap-4 mb-8">
+        <div className="mb-8 grid grid-cols-4 gap-2 md:flex md:justify-center md:gap-4">
           {FAQ_CATEGORIES.map((item) => {
             const isActive = activeCategory === item.id;
             return (
@@ -112,7 +104,7 @@ export default function FAQList() {
                 type="button"
                 onClick={() => handleCategoryChange(item.id)}
                 className={cn(
-                  "flex flex-col items-center gap-2 p-4 rounded-2xl border-2 transition-colors min-w-[100px]",
+                  "flex w-full flex-col items-center gap-2 rounded-2xl border-2 p-2 transition-colors md:min-w-[100px] md:p-4",
                   isActive
                     ? "border-primary shadow-lg shadow-black/5"
                     : "border-neutral-200 bg-neutral-50 text-neutral-500 hover:border-neutral-300",
@@ -130,7 +122,7 @@ export default function FAQList() {
                 </div>
                 <span
                   className={cn(
-                    "text-sm font-medium",
+                    "text-[11px] font-medium leading-tight md:text-sm",
                     isActive ? "text-deep" : "",
                   )}
                 >

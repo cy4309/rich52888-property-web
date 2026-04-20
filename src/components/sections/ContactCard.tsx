@@ -218,8 +218,7 @@ export default function ContactCard() {
                   className={`${fieldClassName} appearance-none pr-10`}
                 >
                   <option value="">請選擇需求</option>
-                  <option value="房屋融資二胎">房屋融資二胎</option>
-                  <option value="民間融資二胎">民間融資二胎</option>
+                  <option value="房屋二胎">房屋二胎</option>
                   <option value="汽機車借款">汽機車借款</option>
                   <option value="代書借款">代書借款</option>
                   <option value="小額借款">小額借款</option>
