@@ -11,6 +11,11 @@ import { baseUrl } from "@/lib/seo";
 /** 讓相對路徑 OG／canonical 解析正確；請將 NEXT_PUBLIC_SITE_URL 設成實際上線網域（含 https，與託管 301 目標一致） */
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  icons: {
+    icon: [{ url: "/logo.png", type: "image/png" }],
+    apple: [{ url: "/logo.png", type: "image/png" }],
+    shortcut: ["/logo.png"],
+  },
 };
 
 /** 避免 iOS 聚焦 input 時自動放大視窗（等同 maximum-scale=1, user-scalable=no） */
