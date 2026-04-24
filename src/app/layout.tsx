@@ -6,9 +6,10 @@ import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import FloatingContactCard from "@/components/layout/FloatingContactCard";
 import { SiteDealMarquee } from "@/components/ui/SiteDealMarquee";
+import { appConfig } from "@/lib/app-config";
 import { baseUrl } from "@/lib/seo";
 
-/** 讓相對路徑 OG／canonical 解析正確；請將 NEXT_PUBLIC_SITE_URL 設成實際上線網域（含 https，與託管 301 目標一致） */
+/** 讓相對路徑 OG／canonical 解析正確；NEXT_PUBLIC_SITE_URL 使用單一設定 */
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   icons: {
@@ -31,7 +32,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID;
+  const gaId = appConfig.gaId;
 
   return (
     <html lang="zh-Hant">

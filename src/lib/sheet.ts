@@ -1,3 +1,5 @@
+import { appConfig } from "@/lib/app-config";
+
 export type NewsItem = {
   id: string;
   title: string;
@@ -10,7 +12,7 @@ export type NewsItem = {
   seoDesc: string;
 };
 
-const SHEET_API = process.env.NEXT_PUBLIC_SHEET_API;
+const SHEET_API = appConfig.sheetApi;
 
 /** Sheet 無資料時的開發用假資料 */
 const FALLBACK_ITEM: NewsItem = {

@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { CONTACT_REQUIREMENTS_MAX_CHARS } from "@/lib/contact-limits";
+import { appConfig } from "@/lib/app-config";
 
 const MAX_REQUIREMENTS_LEN = CONTACT_REQUIREMENTS_MAX_CHARS;
 const MAX_PHONE_LEN = 32;
@@ -11,9 +12,7 @@ function isValidPhoneInput(value: string): boolean {
 }
 
 function gasWebAppUrl(): string | undefined {
-  return (
-    process.env.CONTACT_GAS_WEBAPP_URL || process.env.NEXT_PUBLIC_SHEET_API
-  );
+  return appConfig.sheetApi;
 }
 
 export async function POST(request: NextRequest) {
