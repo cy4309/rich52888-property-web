@@ -6,12 +6,19 @@ import { usePathname } from "next/navigation";
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/ga";
+import { serviceDefinitions } from "@/content/services";
 
 const NAV_LINKS = [
   { href: "/#services", label: "服務項目" },
   { href: "/#news", label: "最新消息" },
   { href: "/#faq", label: "常見問題" },
   { href: "/#about", label: "關於我們" },
+];
+const MOBILE_NAV_LINKS = [
+  { href: "/#news", label: "最新消息" },
+  { href: "/#faq", label: "常見問題" },
+  { href: "/#about", label: "關於我們" },
+  { href: "/#services", label: "服務項目" },
 ];
 
 export default function Navbar() {
@@ -124,45 +131,66 @@ export default function Navbar() {
 
       {mobileOpen && (
         <div className="absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-neutral-100 md:hidden">
-          <nav className="max-w-6xl mx-auto px-6 py-4 flex flex-col gap-1">
-            {NAV_LINKS.map(({ href, label }) => {
-              const isActive =
-                href === "/" ? pathname === "/" : pathname.startsWith(href);
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  onClick={() => {
-                    trackEvent("section_nav_click", {
-                      source: "navbar_mobile",
-                      target: href.replace("/#", ""),
-                    });
-                    setMobileOpen(false);
-                  }}
-                  className={cn(
-                    "py-3 px-4 rounded-2xl font-bold text-neutral-600 hover:text-primary hover:bg-neutral-50",
-                    isActive
-                      ? "font-semibold text-primary bg-primary/5"
-                      : undefined,
-                  )}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-            <Link
-              href="/#contact"
-              onClick={() => {
-                trackEvent("contact_cta_click", {
-                  source: "navbar_mobile",
-                  target: "contact_section",
-                });
-                setMobileOpen(false);
-              }}
-              className="mt-2 py-3 px-4 bg-primary text-white rounded-2xl text-center font-bold hover:opacity-90"
-            >
-              立即諮詢
-            </Link>
+          <nav className="max-w-6xl mx-auto px-6 py-4">
+            <div className="space-y-1">
+              <Link
+                href="/#contact"
+                onClick={() => {
+                  trackEvent("contact_cta_click", {
+                    source: "navbar_mobile",
+                    target: "contact_section",
+                  });
+                  setMobileOpen(false);
+                }}
+                className="mt-1 py-2 px-3 bg-primary text-white rounded-2xl text-center text-sm font-bold hover:opacity-90 block"
+              >
+                立即諮詢
+              </Link>
+              {MOBILE_NAV_LINKS.map(({ href, label }) => {
+                const isActive =
+                  href === "/" ? pathname === "/" : pathname.startsWith(href);
+                return (
+                  <div key={href}>
+                    <Link
+                      href={href}
+                      onClick={() => {
+                        trackEvent("section_nav_click", {
+                          source: "navbar_mobile",
+                          target: href.replace("/#", ""),
+                        });
+                        setMobileOpen(false);
+                      }}
+                      className={cn(
+                        "py-2 px-3 rounded-2xl text-sm font-bold text-neutral-600 hover:text-primary hover:bg-neutral-50 block",
+                        isActive ? "text-primary bg-primary/5" : undefined,
+                      )}
+                    >
+                      {label}
+                    </Link>
+                    {href === "/#services" ? (
+                      <div className="mt-2 mb-1 ml-3 flex flex-wrap gap-2">
+                        {serviceDefinitions.map((service) => (
+                          <Link
+                            key={service.slug}
+                            href={`/services/${service.slug}`}
+                            onClick={() => {
+                              trackEvent("service_nav_click", {
+                                source: "navbar_mobile",
+                                service: service.slug,
+                              });
+                              setMobileOpen(false);
+                            }}
+                            className="rounded-full border border-neutral-300 bg-white px-3 py-1.5 text-xs text-neutral-700 hover:border-primary hover:text-primary transition-colors"
+                          >
+                            {service.title}
+                          </Link>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
+                );
+              })}
+            </div>
           </nav>
         </div>
       )}

@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { baseUrl } from "@/lib/seo";
 import { getNews } from "@/lib/sheet";
+import { serviceDefinitions } from "@/content/services";
 
 /** 與 sheet `getNews` 的 ISR 一致，新文章才會進 sitemap */
 export const revalidate = 120;
@@ -8,6 +9,13 @@ export const revalidate = 120;
 /** 僅列出實際存在的路由。首頁區塊為 /#about、/#services 等，不宜寫成 /about 以免 404。 */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const news = await getNews();
+  const serviceUrls: MetadataRoute.Sitemap = serviceDefinitions.map((s) => ({
+    url: `${baseUrl}/services/${s.slug}`,
+    lastModified: new Date(),
+    changeFrequency: "monthly" as const,
+    priority: 0.85,
+  }));
+
   const newsUrls: MetadataRoute.Sitemap = news.map((item) => ({
     url: `${baseUrl}/news/${encodeURIComponent(item.slug)}`,
     lastModified: (() => {
@@ -31,6 +39,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...serviceUrls,
     ...newsUrls,
   ];
 }
