@@ -7,6 +7,7 @@ import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/ga";
 import { serviceDefinitions } from "@/content/services";
+import SafeImage from "@/components/ui/SafeImage";
 
 const NAV_LINKS = [
   { href: "/#services", label: "服務項目" },
@@ -60,7 +61,7 @@ export default function Navbar() {
           onClick={handleLogoClick}
           className="shrink-0 flex items-center gap-3 min-w-0"
         >
-          <img
+          <SafeImage
             src="/logo.png"
             alt="logo"
             width={36}

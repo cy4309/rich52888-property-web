@@ -2,6 +2,7 @@ import type { ReactNode } from "react";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import type { ServiceIcon } from "@/content/services";
+import BackToTopButton from "@/components/ui/BackToTopButton";
 
 type Props = {
   title: string;
@@ -27,6 +28,7 @@ export default function ServiceDetailShell({ title, icon: Icon, children }: Prop
         </header>
         <div className="text-sm md:text-base">{children}</div>
       </div>
+      <BackToTopButton />
     </article>
   );
 }

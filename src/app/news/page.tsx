@@ -5,6 +5,7 @@ import { generatePageMetadata } from "@/lib/seo";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
 import TrackedLink from "@/components/analytics/TrackedLink";
+import SafeImage from "@/components/ui/SafeImage";
 
 export const metadata = generatePageMetadata({
   title: "最新消息",
@@ -37,7 +38,7 @@ export default async function NewsPage() {
               <Card>
                 <div className="aspect-video bg-neutral-100">
                   {item.cover && (
-                    <img
+                    <SafeImage
                       src={item.cover}
                       alt={item.title}
                       className="w-full h-full object-cover"

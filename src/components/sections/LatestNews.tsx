@@ -2,6 +2,7 @@ import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
 import { buttonVariants } from "@/components/ui/Button";
 import TrackedLink from "@/components/analytics/TrackedLink";
+import SafeImage from "@/components/ui/SafeImage";
 import type { NewsItem } from "@/lib/sheet";
 
 type LatestNewsProps = {
@@ -24,7 +25,7 @@ export default function LatestNews({ items }: LatestNewsProps) {
               <Card>
                 <div className="aspect-video bg-neutral-100 overflow-hidden">
                   {item.cover ? (
-                    <img
+                    <SafeImage
                       src={item.cover}
                       alt={item.title}
                       className="w-full h-full object-cover"

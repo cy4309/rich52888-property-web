@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HiOutlineChevronRight } from "react-icons/hi2";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
 import { serviceDefinitions } from "@/content/services";
@@ -18,7 +19,7 @@ export default function ServiceGrid() {
             <Link
               key={item.slug}
               href={`/services/${item.slug}`}
-              className="block rounded-2xl outline-none transition-shadow hover:shadow-lg hover:shadow-black/10 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+              className="block rounded-2xl outline-none transition-shadow hover:shadow-lg hover:shadow-black/10 max-md:active:opacity-90 focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               <Card className="h-full">
                 <div className="p-6">
@@ -31,6 +32,13 @@ export default function ServiceGrid() {
                   <p className="text-sm text-neutral-600 leading-relaxed">
                     {item.description}
                   </p>
+                  <div
+                    className="mt-4 flex items-center justify-end gap-1 text-sm font-medium text-primary md:hidden"
+                    aria-hidden
+                  >
+                    查看更多
+                    <HiOutlineChevronRight className="h-4 w-4 shrink-0" />
+                  </div>
                 </div>
               </Card>
             </Link>
