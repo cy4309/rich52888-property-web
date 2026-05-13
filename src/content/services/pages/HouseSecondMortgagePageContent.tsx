@@ -1,4 +1,5 @@
 import { houseSecondMortgageTocItems } from "@/content/services/house-second-mortgage-toc";
+import LoanComparisonCalculator from "@/components/sections/LoanComparisonCalculator";
 import {
   HiOutlineShieldCheck,
   HiOutlineScale,
@@ -153,7 +154,7 @@ export default function HouseSecondMortgagePageContent() {
 
       <section id="loan-calculator" className="scroll-mt-28 space-y-3">
         <h2 className="text-deep text-2xl font-bold">房屋二胎試算器</h2>
-        <p>此區塊可放入試算器元件，協助快速估算可貸額度與每月還款。</p>
+        <LoanComparisonCalculator />
       </section>
 
       <section id="loan-steps" className="scroll-mt-28 space-y-4">
