@@ -10,9 +10,6 @@ export default function ServiceGrid() {
       <div className="max-w-6xl mx-auto px-6">
         <div className="flex justify-between items-center">
           <SectionTitle title="服務項目" />
-          {/* <Link href="/services" className="text-primary text-sm underline">
-            查看更多
-          </Link> */}
         </div>
         <div className="grid md:grid-cols-2 gap-6">
           {serviceDefinitions.map((item) => (

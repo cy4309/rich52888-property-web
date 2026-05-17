@@ -3,8 +3,17 @@
 import { useState } from "react";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Button from "@/components/ui/Button";
+import FeedbackModal, {
+  type FeedbackModalVariant,
+} from "@/components/ui/FeedbackModal";
 import { CONTACT_REQUIREMENTS_MAX_CHARS } from "@/lib/contact-limits";
 import { trackEvent } from "@/lib/ga";
+
+type FeedbackPopup = {
+  type: FeedbackModalVariant;
+  title: string;
+  message: string;
+};
 
 export default function ContactCard() {
   const [name, setName] = useState("");
@@ -12,10 +21,18 @@ export default function ContactCard() {
   const [email, setEmail] = useState("");
   const [demand, setDemand] = useState("");
   const [requirements, setRequirements] = useState("");
-  const [status, setStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [validationError, setValidationError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [feedbackPopup, setFeedbackPopup] = useState<FeedbackPopup | null>(
+    null,
+  );
+
+  const showErrorPopup = (message: string) => {
+    setFeedbackPopup({
+      type: "error",
+      title: "提交失敗",
+      message,
+    });
+  };
   const fieldClassName =
     "w-full rounded-2xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm font-inter text-slate-900 placeholder:text-slate-500 focus:outline-none focus:border-slate-400 transition-colors";
   const sanitizePhoneInput = (value: string) => value.replace(/\D/g, "");
@@ -33,7 +50,7 @@ export default function ContactCard() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setValidationError("");
+    setFeedbackPopup(null);
 
     const trimmedName = name.trim();
     const trimmedPhone = phone.trim();
@@ -42,7 +59,7 @@ export default function ContactCard() {
     const trimmedRequirements = requirements.trim();
 
     if (!trimmedName || !trimmedPhone) {
-      setValidationError("請填寫完整表單");
+      showErrorPopup("請填寫完整表單");
       trackEvent("form_submit_error", {
         form_name: "contact_form",
         error_type: "validation",
@@ -51,7 +68,7 @@ export default function ContactCard() {
     }
 
     if (!isValidPhone(trimmedPhone)) {
-      setValidationError("電話僅能輸入數字（8 到 32 碼），不可包含特殊符號");
+      showErrorPopup("電話僅能輸入數字（8 到 32 碼），不可包含特殊符號");
       trackEvent("form_submit_error", {
         form_name: "contact_form",
         error_type: "validation",
@@ -60,7 +77,7 @@ export default function ContactCard() {
     }
 
     if (trimmedEmail && !isValidEmail(trimmedEmail)) {
-      setValidationError("電子郵件格式錯誤，且不可包含特殊符號");
+      showErrorPopup("電子郵件格式錯誤，且不可包含特殊符號");
       trackEvent("form_submit_error", {
         form_name: "contact_form",
         error_type: "validation",
@@ -69,7 +86,7 @@ export default function ContactCard() {
     }
 
     if (trimmedRequirements.length > CONTACT_REQUIREMENTS_MAX_CHARS) {
-      setValidationError(`備註最多 ${CONTACT_REQUIREMENTS_MAX_CHARS} 字`);
+      showErrorPopup(`備註最多 ${CONTACT_REQUIREMENTS_MAX_CHARS} 字`);
       trackEvent("form_submit_error", {
         form_name: "contact_form",
         error_type: "validation",
@@ -77,7 +94,7 @@ export default function ContactCard() {
       return;
     }
 
-    setStatus("loading");
+    setIsSubmitting(true);
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -103,13 +120,16 @@ export default function ContactCard() {
         source: "contact_section",
         demand_type: trimmedDemand || "unspecified",
       });
-      setStatus("success");
       setName("");
       setPhone("");
       setEmail("");
       setDemand("");
       setRequirements("");
-      setTimeout(() => setStatus("idle"), 5000);
+      setFeedbackPopup({
+        type: "success",
+        title: "提交成功",
+        message: "我們已收到您的諮詢，專員將盡快與您聯繫，謝謝！",
+      });
     } catch (caught) {
       const message =
         caught instanceof Error && caught.message ? caught.message : "提交失敗";
@@ -117,12 +137,9 @@ export default function ContactCard() {
         form_name: "contact_form",
         error_type: "api",
       });
-      setValidationError(message);
-      setStatus("error");
-      setTimeout(() => {
-        setStatus("idle");
-        setValidationError("");
-      }, 5000);
+      showErrorPopup(message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -270,23 +287,23 @@ export default function ContactCard() {
             </div>
             <Button
               type="submit"
-              disabled={status === "loading"}
+              disabled={isSubmitting}
               aria-label="提交"
               className="self-end px-6 py-3 disabled:opacity-50"
             >
-              {status === "loading" ? "..." : "提交"}
+              {isSubmitting ? "提交中…" : "提交"}
             </Button>
-            {status === "success" && (
-              <p className="text-sm text-primary/80">提交成功</p>
-            )}
-            {(validationError || status === "error") && (
-              <p className="text-sm text-primary/80">
-                {validationError || "提交失敗"}
-              </p>
-            )}
           </div>
         </form>
       </div>
+
+      <FeedbackModal
+        open={feedbackPopup !== null}
+        onClose={() => setFeedbackPopup(null)}
+        variant={feedbackPopup?.type ?? "success"}
+        title={feedbackPopup?.title ?? ""}
+        message={feedbackPopup?.message ?? ""}
+      />
     </section>
   );
 }

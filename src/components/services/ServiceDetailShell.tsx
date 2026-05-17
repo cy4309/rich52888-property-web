@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa";
 import type { ServiceIcon } from "@/content/services";
 import BackToTopButton from "@/components/ui/BackToTopButton";
+import HashScrollOnMount from "@/components/ui/HashScrollOnMount";
 
 type Props = {
   title: string;
@@ -13,6 +14,7 @@ type Props = {
 export default function ServiceDetailShell({ title, icon: Icon, children }: Props) {
   return (
     <article className="bg-neutral-50 min-h-screen py-20 pb-28">
+      <HashScrollOnMount />
       <div className="max-w-6xl mx-auto px-6">
         <Link
           href="/#services"

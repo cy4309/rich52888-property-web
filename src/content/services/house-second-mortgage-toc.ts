@@ -4,6 +4,9 @@ export const houseSecondMortgageTocItems = [
   { id: "why-choose-us", label: "為什麼選擇謙謙資產管理顧問" },
   { id: "loan-calculator", label: "房屋二胎試算器" },
   { id: "loan-steps", label: "房屋二胎貸款步驟" },
+  { id: "related-articles", label: "你可能會想知道" },
 ] as const;
 
 export const HOUSE_SECOND_MORTGAGE_PATH = "/services/house-second-mortgage";
+export const HOUSE_SECOND_MORTGAGE_CALCULATOR_ID = "loan-calculator";
+export const HOUSE_SECOND_MORTGAGE_CALCULATOR_PATH = `${HOUSE_SECOND_MORTGAGE_PATH}#${HOUSE_SECOND_MORTGAGE_CALCULATOR_ID}`;

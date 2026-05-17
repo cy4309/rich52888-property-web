@@ -5,6 +5,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import BottomNav from "@/components/layout/BottomNav";
 import FloatingContactCard from "@/components/layout/FloatingContactCard";
+import FloatingCalculatorLink from "@/components/layout/FloatingCalculatorLink";
 import { SiteDealMarquee } from "@/components/ui/SiteDealMarquee";
 import { appConfig } from "@/lib/app-config";
 import { baseUrl } from "@/lib/seo";
@@ -44,6 +45,7 @@ export default function RootLayout({
         <Footer />
         <div className="h-16 lg:hidden" aria-hidden />
         <BottomNav />
+        <FloatingCalculatorLink />
         <FloatingContactCard />
         {gaId ? <GoogleAnalytics gaId={gaId} /> : null}
       </body>

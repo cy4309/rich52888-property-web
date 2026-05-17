@@ -1,4 +1,5 @@
 import { vehicleLoanTocItems } from "@/content/services/vehicle-loan-toc";
+import ScrollableTable from "@/components/ui/ScrollableTable";
 
 export default function VehicleLoanPageContent() {
   const tocItems = vehicleLoanTocItems;
@@ -29,7 +30,7 @@ export default function VehicleLoanPageContent() {
         <p>
           機車貸款是利用機車作為抵押品，向銀行或融資公司申請資金，常見分為機車購車貸款、機車原車融資與機車二貸（增貸/轉貸）。
         </p>
-        <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
+        <ScrollableTable>
           <table className="min-w-[900px] w-full text-sm">
             <thead className="bg-neutral-50 text-neutral-700">
               <tr>
@@ -78,7 +79,7 @@ export default function VehicleLoanPageContent() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </ScrollableTable>
 
         <div className="space-y-2 rounded-2xl border border-neutral-200 bg-white p-4">
           <h3 className="text-deep font-bold">機車貸款適合誰</h3>
@@ -124,7 +125,7 @@ export default function VehicleLoanPageContent() {
 
       <section id="motorcycle-rate-limit" className="scroll-mt-28 space-y-4">
         <h2 className="text-deep text-2xl font-bold">機車貸款利率及額度</h2>
-        <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
+        <ScrollableTable>
           <table className="min-w-[900px] w-full text-sm">
             <thead className="bg-neutral-50 text-neutral-700">
               <tr>
@@ -179,12 +180,12 @@ export default function VehicleLoanPageContent() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </ScrollableTable>
       </section>
 
       <section id="car-loan" className="scroll-mt-28 space-y-4">
         <h2 className="text-deep text-2xl font-bold">汽車貸款</h2>
-        <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
+        <ScrollableTable>
           <table className="min-w-[900px] w-full text-sm">
             <thead className="bg-neutral-50 text-neutral-700">
               <tr>
@@ -227,7 +228,7 @@ export default function VehicleLoanPageContent() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </ScrollableTable>
 
         <div className="grid gap-4 md:grid-cols-2">
           <div className="rounded-2xl border border-neutral-200 bg-white p-4">
@@ -262,7 +263,7 @@ export default function VehicleLoanPageContent() {
 
       <section id="car-loan-channel-comparison" className="scroll-mt-28 space-y-4">
         <h2 className="text-deep text-2xl font-bold">各管道汽車貸款比較表</h2>
-        <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
+        <ScrollableTable>
           <table className="min-w-[900px] w-full text-sm">
             <thead className="bg-neutral-50 text-neutral-700">
               <tr>
@@ -311,7 +312,7 @@ export default function VehicleLoanPageContent() {
               </tr>
             </tbody>
           </table>
-        </div>
+        </ScrollableTable>
       </section>
     </div>
   );

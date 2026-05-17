@@ -1,5 +1,7 @@
+import Link from "next/link";
 import { houseSecondMortgageTocItems } from "@/content/services/house-second-mortgage-toc";
 import LoanComparisonCalculator from "@/components/sections/LoanComparisonCalculator";
+import ScrollableTable from "@/components/ui/ScrollableTable";
 import {
   HiOutlineShieldCheck,
   HiOutlineScale,
@@ -9,6 +11,7 @@ import {
   HiOutlineClipboardDocumentCheck,
   HiOutlineDocumentText,
   HiOutlineBanknotes,
+  HiOutlineNewspaper,
 } from "react-icons/hi2";
 
 export default function HouseSecondMortgagePageContent() {
@@ -36,6 +39,26 @@ export default function HouseSecondMortgagePageContent() {
     {
       icon: HiOutlineBanknotes,
       text: "資金入帳：確認資料正確後，最快 24 小時內撥款至您的帳戶。",
+    },
+  ] as const;
+
+  const relatedArticles = [
+    {
+      label: "房屋貸款條件",
+      href: "/news/housing-loan-qualification-guide",
+    },
+    { label: "房貸利率", href: "/news/mortgage-rate-guide" },
+    {
+      label: "房貸成數",
+      href: "/news/mortgage-loan-to-value-guide",
+    },
+    {
+      label: "房屋轉增貸",
+      href: "/news/mortgage-refinance-cash-out-guide",
+    },
+    {
+      label: "持分房屋貸款",
+      href: "/news/partial-ownership-mortgage-guide",
     },
   ] as const;
 
@@ -68,15 +91,19 @@ export default function HouseSecondMortgagePageContent() {
       </section>
 
       <section id="loan-comparison" className="scroll-mt-28 space-y-4">
-        <h2 className="text-deep text-2xl font-bold">銀行二胎、融資公司、謙謙管理顧問公司比較</h2>
-        <div className="overflow-x-auto rounded-2xl border border-neutral-200 bg-white">
+        <h2 className="text-deep text-2xl font-bold">
+          銀行二胎、融資公司、謙謙管理顧問公司比較
+        </h2>
+        <ScrollableTable>
           <table className="min-w-[900px] w-full text-sm">
             <thead className="bg-neutral-50 text-neutral-700">
               <tr>
                 <th className="px-4 py-3 text-left font-bold">比較項目</th>
                 <th className="px-4 py-3 text-left font-bold">銀行二胎</th>
                 <th className="px-4 py-3 text-left font-bold">融資公司</th>
-                <th className="px-4 py-3 text-left font-bold">謙謙管理顧問公司</th>
+                <th className="px-4 py-3 text-left font-bold">
+                  謙謙管理顧問公司
+                </th>
               </tr>
             </thead>
             <tbody className="divide-y divide-neutral-100">
@@ -102,7 +129,9 @@ export default function HouseSecondMortgagePageContent() {
                 <td className="px-4 py-3 font-semibold text-deep">信用門檻</td>
                 <td className="px-4 py-3">極高（信用評分良好）</td>
                 <td className="px-4 py-3">中等（可接受輕微信用瑕疵）</td>
-                <td className="px-4 py-3">極低（不看信用分數，有房產價值即可）</td>
+                <td className="px-4 py-3">
+                  極低（不看信用分數，有房產價值即可）
+                </td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-semibold text-deep">財力證明</td>
@@ -117,7 +146,9 @@ export default function HouseSecondMortgagePageContent() {
                 <td className="px-4 py-3">依照需求及條件彈性客製</td>
               </tr>
               <tr>
-                <td className="px-4 py-3 font-semibold text-deep">手續費 / 開辦費</td>
+                <td className="px-4 py-3 font-semibold text-deep">
+                  手續費 / 開辦費
+                </td>
                 <td className="px-4 py-3">固定開辦費 3,000-10,000</td>
                 <td className="px-4 py-3">固定比例 3%-5%</td>
                 <td className="px-4 py-3">依案件評估</td>
@@ -126,11 +157,13 @@ export default function HouseSecondMortgagePageContent() {
                 <td className="px-4 py-3 font-semibold text-deep">適合對象</td>
                 <td className="px-4 py-3">受僱職員、高薪族群</td>
                 <td className="px-4 py-3">收入多元、銀行二胎額度不足</td>
-                <td className="px-4 py-3">有短期周轉、大量或急迫資金需求、信用瑕疵、無法認列收入</td>
+                <td className="px-4 py-3">
+                  有短期周轉、大量或急迫資金需求、信用瑕疵、無法認列收入
+                </td>
               </tr>
             </tbody>
           </table>
-        </div>
+        </ScrollableTable>
       </section>
 
       <section id="why-choose-us" className="scroll-mt-28 space-y-4">
@@ -169,10 +202,36 @@ export default function HouseSecondMortgagePageContent() {
                 <step.icon className="h-5 w-5" />
               </div>
               <div className="space-y-1">
-                <p className="text-sm font-semibold text-deep">步驟 {idx + 1}</p>
+                <p className="text-sm font-semibold text-deep">
+                  步驟 {idx + 1}
+                </p>
                 <p className="text-sm">{step.text}</p>
               </div>
             </div>
+          ))}
+        </div>
+      </section>
+
+      <section id="related-articles" className="scroll-mt-28 space-y-4">
+        <h2 className="text-deep text-2xl font-bold">你可能會想知道</h2>
+        <p className="text-sm">連結到最新消息的文章：</p>
+        <div className="space-y-3">
+          {relatedArticles.map((article, idx) => (
+            <Link
+              key={article.href}
+              href={article.href}
+              className="rounded-2xl border border-neutral-200 bg-white p-4 flex gap-3 transition-colors hover:border-primary/40"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <HiOutlineNewspaper className="h-5 w-5" aria-hidden />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-semibold text-deep">
+                  {article.label}
+                </p>
+                <p className="text-sm text-primary">前往閱讀最新消息</p>
+              </div>
+            </Link>
           ))}
         </div>
       </section>

@@ -114,26 +114,27 @@ export default function Navbar() {
           </Link>
         </nav>
 
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex items-center md:hidden">
           <button
             type="button"
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="p-2 text-neutral-600 hover:text-primary"
+            className="-mr-2 flex h-11 w-11 items-center justify-center rounded-xl text-neutral-600 hover:bg-neutral-50 hover:text-primary active:bg-neutral-100"
             aria-label={mobileOpen ? "關閉選單" : "開啟選單"}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? (
-              <HiOutlineXMark className="w-6 h-6" />
+              <HiOutlineXMark className="h-7 w-7" />
             ) : (
-              <HiOutlineBars3 className="w-6 h-6" />
+              <HiOutlineBars3 className="h-7 w-7" />
             )}
           </button>
         </div>
       </div>
 
       {mobileOpen && (
-        <div className="absolute top-16 left-0 right-0 bg-white shadow-lg border-t border-neutral-100 md:hidden">
-          <nav className="max-w-6xl mx-auto px-6 py-4">
-            <div className="space-y-1">
+        <div className="absolute top-16 left-0 right-0 max-h-[calc(100dvh-4rem)] overflow-y-auto bg-white shadow-lg border-t border-neutral-100 md:hidden">
+          <nav className="max-w-6xl mx-auto px-4 py-5">
+            <div className="space-y-2">
               <Link
                 href="/#contact"
                 onClick={() => {
@@ -143,7 +144,7 @@ export default function Navbar() {
                   });
                   setMobileOpen(false);
                 }}
-                className="mt-1 py-2 px-3 bg-primary text-white rounded-2xl text-center text-sm font-bold hover:opacity-90 block"
+                className="flex min-h-12 items-center justify-center rounded-2xl bg-primary px-4 py-3.5 text-center text-base font-bold text-white hover:opacity-90 active:opacity-95"
               >
                 立即諮詢
               </Link>
@@ -151,7 +152,7 @@ export default function Navbar() {
                 const isActive =
                   href === "/" ? pathname === "/" : pathname.startsWith(href);
                 return (
-                  <div key={href}>
+                  <div key={href} className="space-y-1.5">
                     <Link
                       href={href}
                       onClick={() => {
@@ -162,14 +163,14 @@ export default function Navbar() {
                         setMobileOpen(false);
                       }}
                       className={cn(
-                        "py-2 px-3 rounded-2xl text-sm font-bold text-neutral-600 hover:text-primary hover:bg-neutral-50 block",
-                        isActive ? "text-primary bg-primary/5" : undefined,
+                        "flex min-h-12 items-center rounded-2xl px-4 py-3.5 text-base font-bold text-neutral-600 hover:bg-neutral-50 hover:text-primary active:bg-neutral-100",
+                        isActive ? "bg-primary/5 text-primary" : undefined,
                       )}
                     >
                       {label}
                     </Link>
                     {href === "/#services" ? (
-                      <div className="mt-2 mb-1 ml-3 flex flex-wrap gap-2">
+                      <div className="ml-2 flex flex-wrap gap-2 border-l-2 border-neutral-100 pl-3 pt-0.5">
                         {serviceDefinitions.map((service) => (
                           <Link
                             key={service.slug}
@@ -181,7 +182,7 @@ export default function Navbar() {
                               });
                               setMobileOpen(false);
                             }}
-                            className="rounded-full border border-neutral-300 bg-white px-3 py-1.5 text-xs text-neutral-700 hover:border-primary hover:text-primary transition-colors"
+                            className="inline-flex min-h-11 items-center rounded-full border border-neutral-300 bg-white px-4 py-2.5 text-[15px] font-medium text-neutral-700 transition-colors hover:border-primary hover:bg-neutral-50 hover:text-primary active:bg-neutral-100"
                           >
                             {service.title}
                           </Link>
