@@ -70,7 +70,9 @@ export default function Navbar() {
             decoding="async"
           />
           <div className="flex flex-col min-w-0">
-            <div className="font-bold text-deep">謙謙資產管理顧問</div>
+            <div className="text-[17px] font-bold text-deep">
+              謙謙資產管理顧問
+            </div>
             <div className="text-[8px] font-bold text-neutral-500">
               RICH52888 ASSET MANAGEMENT
             </div>
