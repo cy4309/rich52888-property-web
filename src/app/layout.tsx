@@ -8,11 +8,24 @@ import FloatingContactCard from "@/components/layout/FloatingContactCard";
 import FloatingCalculatorLink from "@/components/layout/FloatingCalculatorLink";
 import { SiteDealMarquee } from "@/components/ui/SiteDealMarquee";
 import { appConfig } from "@/lib/app-config";
-import { baseUrl } from "@/lib/seo";
+import {
+  baseUrl,
+  defaultSiteDescription,
+  isProductionSite,
+  siteName,
+} from "@/lib/seo";
 
-/** 讓相對路徑 OG／canonical 解析正確；NEXT_PUBLIC_SITE_URL 使用單一設定 */
+/** 讓相對路徑 OG／canonical 解析正確；子頁 title 會套用 template */
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
+  title: {
+    default: siteName,
+    template: `%s | ${siteName}`,
+  },
+  description: defaultSiteDescription,
+  robots: isProductionSite
+    ? { index: true, follow: true }
+    : { index: false, follow: false },
   icons: {
     icon: [{ url: "/logo.png", type: "image/png" }],
     apple: [{ url: "/logo.png", type: "image/png" }],

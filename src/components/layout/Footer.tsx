@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { serviceDefinitions } from "@/content/services";
+import { HOUSE_SECOND_MORTGAGE_CALCULATOR_PATH } from "@/content/services/house-second-mortgage-toc";
 
 const NAV_LINKS = [
   { href: "/#news", label: "最新消息" },
@@ -47,6 +48,12 @@ export default function Footer() {
                       {service.title}
                     </Link>
                   ))}
+                  <Link
+                    href={HOUSE_SECOND_MORTGAGE_CALCULATOR_PATH}
+                    className="rounded-full border border-primary bg-primary/5 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+                  >
+                    房屋二胎試算器
+                  </Link>
                 </div>
               </div>
             </nav>

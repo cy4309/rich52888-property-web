@@ -1,10 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { useMemo, useState } from "react";
-
-const LINE_ADD_URL =
-  process.env.NEXT_PUBLIC_LINE_ADD_FRIEND_URL ?? "https://line.me/ti/p/@030iqqht";
+import LineQrContactPanel from "@/components/sections/LineQrContactPanel";
 
 type Labor = "yes" | "no";
 type Collateral = "none" | "phone" | "motorcycle" | "car" | "house";
@@ -76,12 +73,6 @@ export default function SmallLoanMinuteCalculator() {
   const paymentForResult = useMemo(
     () => monthlyPayment(principalForResult, annualForResult, MONTHS),
     [principalForResult, annualForResult],
-  );
-
-  const qrSrc = useMemo(
-    () =>
-      `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(LINE_ADD_URL)}`,
-    [],
   );
 
   return (
@@ -167,20 +158,7 @@ export default function SmallLoanMinuteCalculator() {
               </p>
             </div>
 
-            <div className="border-t border-neutral-100 pt-4 text-center">
-              <p className="text-sm font-semibold text-deep">加入 LINE 由專員為您確認方案</p>
-              <p className="mt-1 text-xs text-neutral-500 break-all">{LINE_ADD_URL}</p>
-              <div className="relative mx-auto mt-3 h-[220px] w-[220px]">
-                <Image
-                  src={qrSrc}
-                  alt="LINE 官方帳號 QR Code"
-                  fill
-                  className="rounded-lg border border-neutral-200 bg-white object-contain p-2"
-                  sizes="220px"
-                  unoptimized
-                />
-              </div>
-            </div>
+            <LineQrContactPanel />
           </div>
 
           <button

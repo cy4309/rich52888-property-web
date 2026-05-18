@@ -1,8 +1,8 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { getNewsBySlug } from "@/lib/sheet";
 import { generatePageMetadata } from "@/lib/seo";
-import { FaArrowLeft } from "react-icons/fa";
+import BackLink from "@/components/ui/BackLink";
+import BackToTopButton from "@/components/ui/BackToTopButton";
 import NewsReadTracker from "@/components/analytics/NewsReadTracker";
 import SafeImage from "@/components/ui/SafeImage";
 
@@ -31,15 +31,10 @@ export default async function NewsSlugPage({ params }: Props) {
   if (!item) notFound();
 
   return (
-    <article className="bg-neutral-50 min-h-screen py-20">
+    <article className="bg-neutral-50 min-h-screen py-20 pb-28">
       <div className="max-w-6xl mx-auto px-6">
         <NewsReadTracker slug={slug} />
-        <Link
-          href="/news"
-          className="text-primary hover:opacity-90 mb-6 flex items-center gap-2"
-        >
-          <FaArrowLeft /> 返回最新消息
-        </Link>
+        <BackLink target="news" className="mb-6" />
         <header className="mb-8">
           <h1 className="text-3xl font-bold text-deep mb-4">{item.title}</h1>
           <time className="text-neutral-500 text-sm">{item.date}</time>
@@ -57,6 +52,7 @@ export default async function NewsSlugPage({ params }: Props) {
           {item.content}
         </div>
       </div>
+      <BackToTopButton ariaLabel="回到文章頂端" />
     </article>
   );
 }

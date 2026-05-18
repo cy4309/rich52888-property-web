@@ -1,8 +1,17 @@
+import Link from "next/link";
 import { vehicleLoanTocItems } from "@/content/services/vehicle-loan-toc";
 import ScrollableTable from "@/components/ui/ScrollableTable";
+import { HiOutlineNewspaper } from "react-icons/hi2";
 
 export default function VehicleLoanPageContent() {
   const tocItems = vehicleLoanTocItems;
+
+  const relatedArticles = [
+    {
+      label: "汽車貸款完整指南",
+      href: "/news/car-loan-complete-guide-2026",
+    },
+  ] as const;
 
   return (
     <div className="space-y-8 text-neutral-600 leading-relaxed">
@@ -313,6 +322,28 @@ export default function VehicleLoanPageContent() {
             </tbody>
           </table>
         </ScrollableTable>
+      </section>
+
+      <section id="related-articles" className="scroll-mt-28 space-y-4">
+        <h2 className="text-deep text-2xl font-bold">你可能會想知道</h2>
+        <p className="text-sm">連結到最新消息的文章：</p>
+        <div className="space-y-3">
+          {relatedArticles.map((article) => (
+            <Link
+              key={article.href}
+              href={article.href}
+              className="rounded-2xl border border-neutral-200 bg-white p-4 flex gap-3 transition-colors hover:border-primary/40"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <HiOutlineNewspaper className="h-5 w-5" aria-hidden />
+              </div>
+              <div className="space-y-1">
+                <p className="text-sm font-semibold text-deep">{article.label}</p>
+                <p className="text-sm text-primary">前往閱讀最新消息</p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </section>
     </div>
   );

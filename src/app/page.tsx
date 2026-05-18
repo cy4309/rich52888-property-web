@@ -9,9 +9,9 @@ import { generatePageMetadata } from "@/lib/seo";
 import { getNews } from "@/lib/sheet";
 
 export const metadata = generatePageMetadata({
-  title: "謙謙資產管理顧問",
+  title: "首頁",
   description:
-    "謙謙資產管理顧問，提供房屋二胎、代書信貸、汽機車借款、小額借款等服務。",
+    "謙謙資產管理顧問，提供房屋二胎、代書信貸、汽機車借款、小額借款等專業資金規劃與諮詢服務。",
   path: "/",
 });
 

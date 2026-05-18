@@ -1,6 +1,5 @@
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
 import { getNews } from "@/lib/sheet";
+import BackLink from "@/components/ui/BackLink";
 import { generatePageMetadata } from "@/lib/seo";
 import SectionTitle from "@/components/ui/SectionTitle";
 import Card from "@/components/ui/Card";
@@ -19,13 +18,7 @@ export default async function NewsPage() {
   return (
     <div className="bg-neutral-50 min-h-screen py-20">
       <div className="max-w-6xl mx-auto px-6">
-        <Link
-          href="/"
-          className="text-primary hover:opacity-90 mb-8 inline-flex items-center gap-2 text-sm font-medium transition-opacity"
-        >
-          <FaArrowLeft className="shrink-0" aria-hidden />
-          返回首頁
-        </Link>
+        <BackLink target="home" className="mb-8" />
         <SectionTitle title="最新消息" subtitle="掌握最新動態" />
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item) => (

@@ -7,6 +7,7 @@ import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { cn } from "@/lib/utils";
 import { trackEvent } from "@/lib/ga";
 import { serviceDefinitions } from "@/content/services";
+import { HOUSE_SECOND_MORTGAGE_CALCULATOR_PATH } from "@/content/services/house-second-mortgage-toc";
 import SafeImage from "@/components/ui/SafeImage";
 
 const NAV_LINKS = [
@@ -27,7 +28,6 @@ export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
-  /** 已在首頁時點 logo：同一路由不會導向，需手動回頂並清掉 #錨點 */
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (pathname !== "/") return;
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)
@@ -189,6 +189,19 @@ export default function Navbar() {
                             {service.title}
                           </Link>
                         ))}
+                        <Link
+                          href={HOUSE_SECOND_MORTGAGE_CALCULATOR_PATH}
+                          onClick={() => {
+                            trackEvent("calculator_quick_link_click", {
+                              source: "navbar_mobile",
+                              service: "house-second-mortgage",
+                            });
+                            setMobileOpen(false);
+                          }}
+                          className="inline-flex min-h-11 items-center rounded-full border border-primary bg-primary/5 px-4 py-2.5 text-[15px] font-medium text-primary transition-colors hover:bg-primary/10 active:bg-primary/15"
+                        >
+                          房屋二胎試算器
+                        </Link>
                       </div>
                     ) : null}
                   </div>

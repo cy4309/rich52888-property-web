@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
-import { FaArrowLeft } from "react-icons/fa";
 import type { ServiceIcon } from "@/content/services";
+import BackLink from "@/components/ui/BackLink";
 import BackToTopButton from "@/components/ui/BackToTopButton";
 import HashScrollOnMount from "@/components/ui/HashScrollOnMount";
 
@@ -16,12 +15,7 @@ export default function ServiceDetailShell({ title, icon: Icon, children }: Prop
     <article className="bg-neutral-50 min-h-screen py-20 pb-28">
       <HashScrollOnMount />
       <div className="max-w-6xl mx-auto px-6">
-        <Link
-          href="/#services"
-          className="text-primary hover:opacity-90 mb-6 flex items-center gap-2"
-        >
-          <FaArrowLeft /> 返回服務項目
-        </Link>
+        <BackLink target="services" className="mb-6" />
         <header className="mb-8 flex items-center gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary/20 text-primary">
             <Icon className="h-6 w-6" />
@@ -30,7 +24,7 @@ export default function ServiceDetailShell({ title, icon: Icon, children }: Prop
         </header>
         <div className="text-sm md:text-base">{children}</div>
       </div>
-      <BackToTopButton />
+      <BackToTopButton ariaLabel="回到本服務頁面頂端" />
     </article>
   );
 }

@@ -1,5 +1,5 @@
 import { scrivenerCreditLoanTocItems } from "@/content/services/scrivener-credit-loan-toc";
-import { buttonVariants } from "@/components/ui/Button";
+import LineExpandableCta from "@/components/sections/LineExpandableCta";
 import ScrollableTable from "@/components/ui/ScrollableTable";
 import {
   HiOutlineBanknotes,
@@ -11,10 +11,6 @@ import {
   HiOutlineEyeSlash,
   HiOutlineXCircle,
 } from "react-icons/hi2";
-
-const LINE_ADD_URL =
-  process.env.NEXT_PUBLIC_LINE_ADD_FRIEND_URL ??
-  "https://line.me/ti/p/@030iqqht";
 
 export default function ScrivenerCreditLoanPageContent() {
   const tocItems = scrivenerCreditLoanTocItems;
@@ -192,19 +188,11 @@ export default function ScrivenerCreditLoanPageContent() {
         </div>
       </section>
 
-      <section
+      <LineExpandableCta
         id="line-evaluation"
-        className="scroll-mt-28 flex justify-center"
-      >
-        <a
-          href={LINE_ADD_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={buttonVariants("primary", "w-full max-w-md text-center text-sm sm:text-base")}
-        >
-          點我免費評估代書信貸額度，由專業管理人為您服務
-        </a>
-      </section>
+        buttonLabel="點我免費評估代書信貸額度，由專業管理人為您服務"
+        qrTitle="加入 LINE 由專員為您確認方案"
+      />
 
       <section id="application-process" className="scroll-mt-28 space-y-4">
         <h2 className="text-deep text-2xl font-bold">
